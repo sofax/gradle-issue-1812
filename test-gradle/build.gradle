@@ -1,0 +1,26 @@
+buildscript {
+   repositories {
+      maven { url 'https://plugins.gradle.org/m2/' }
+   }
+}
+
+apply plugin: 'maven'
+
+repositories {
+   maven { url 'https://plugins.gradle.org/m2/' }
+   mavenLocal()
+   mavenCentral()
+}
+
+configurations {
+   depsToCheck.extendsFrom implementation
+}
+
+task copyDeps(type: Copy) {
+   from configurations.depsToCheck
+   into 'deps'
+}
+
+dependencies {
+   implementation 'demo:demo-artifact:1.0.0'
+}

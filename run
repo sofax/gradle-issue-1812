@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Installing demo artifact..." && \
+mvn clean install -f demo-artifact/pom.xml && \
+echo && \
+echo "Copying dependencies using Maven..." && \
+mvn clean dependency:copy-dependencies -f test-maven/pom.xml && \
+echo && \
+rm -rf ./test-gradle/deps && \
+./test-gradle/gradlew copyDeps -b ./test-gradle/build.gradle && \
+echo "DONE."
+
+echo 
